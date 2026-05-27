@@ -1,0 +1,23 @@
+# ── Dev Environment overrides ─────────────────────────────────
+replicaCount: 1
+
+image:
+  tag: "1.21"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+autoscaling:
+  enabled: false
+
+environment: development
+
+config:
+  team: sre
+  owner: debidatta
+  environment: dev

@@ -1,0 +1,9 @@
+apiVersion: v2
+name: helm-nginx
+description: Nginx Helm chart deployed via Argo CD GitOps
+type: application
+version: 0.1.0
+appVersion: "1.21.0"
+maintainers:
+  - name: Debidatta Gouda
+    email: goudadebidatta@gmail.com

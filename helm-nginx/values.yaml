@@ -1,0 +1,89 @@
+# ── Replica count ─────────────────────────────────────────────
+replicaCount: 1
+
+# ── Image ─────────────────────────────────────────────────────
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "1.21"
+
+# ── Service ───────────────────────────────────────────────────
+service:
+  type: NodePort
+  port: 80
+
+# ── Resources ─────────────────────────────────────────────────
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# ── Health checks ─────────────────────────────────────────────
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+# ── Autoscaling ───────────────────────────────────────────────
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+# ── Environment ───────────────────────────────────────────────
+environment: base
+
+# ── Config ────────────────────────────────────────────────────
+config:
+  team: sre
+  owner: debidatta
+
+# ── Node scheduling ───────────────────────────────────────────
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# ── Service Account ───────────────────────────────────────────
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+ingress:
+  enabled: false
+volumes: []
+volumeMounts: []
+
+httpRoute:
+  enabled: false
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: nginx.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []

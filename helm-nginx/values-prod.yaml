@@ -1,0 +1,26 @@
+# ── Production Environment overrides ──────────────────────────
+replicaCount: 3
+
+image:
+  tag: "1.21"
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+
+environment: production
+
+config:
+  team: sre
+  owner: debidatta
+  environment: prod
